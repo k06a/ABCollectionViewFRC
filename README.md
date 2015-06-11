@@ -19,18 +19,28 @@ Just replace this code (MagicalRecord used for example):
 with this code:
 
 ```
+@property (nonatomic, strong) id<NSFetchedResultsControllerDelegate> delegateWrapper;
+
+...
+
+- (id<NSFetchedResultsControllerDelegate>)delegateWrapper
+{
+    if (_delegateWrapper == nil)
+        _delegateWrapper = [[ABCollectionViewFRC alloc] initWithCollectionView:self.collectionView delegate:self];
+    return _delegateWrapper;
+}
+
 - (NSFetchedResultsController *)frc
 {
     if (_frc == nil) {
         _frc = [MenuItem MR_fetchAllSortedBy:@"item_id" ascending:YES withPredicate:
-                [NSPredicate predicateWithFormat:@"section = %@",self.menuSection] groupBy:nil delegate:
-                 [[ABCollectionViewFRC alloc] initWithCollectionView:self.collectionView delegate:self]];
+                [NSPredicate predicateWithFormat:@"section = %@",self.menuSection] groupBy:nil delegate:self.delegateWrapper];
     }
     return _frc;
 }
 ```
 
-You just need to set delegate `[[ABCollectionViewFRC alloc] initWithCollectionView:self.collectionView delegate:self]` instead of just `self` and you will be able to animate `UICollectionView` changes:
+You just need to set delegate `ABCollectionViewFRC` instead of just `self` and you will be able to animate `UICollectionView` changes:
 
 ```
 - (void)controller:(NSFetchedResultsController *)controller didChangeObject:(id)anObject atIndexPath:(NSIndexPath *)indexPath forChangeType:(NSFetchedResultsChangeType)type newIndexPath:(NSIndexPath *)newIndexPath
