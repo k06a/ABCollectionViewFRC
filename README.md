@@ -1,0 +1,2 @@
+# ABCollectionViewFRC
+NSFetchedResultsControllerDelegate wrapper for UICollectionView animated changes
