@@ -3,7 +3,12 @@ NSFetchedResultsControllerDelegate wrapper for UICollectionView animated changes
 
 # Usage
 
-Just replace this code (MagicalRecord used for example):
+Just
+```
+pod 'ABCollectionViewFRC'
+```
+
+and replace this code (MagicalRecord used for example):
 
 ```
 - (NSFetchedResultsController *)frc
