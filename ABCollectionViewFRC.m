@@ -39,7 +39,7 @@
 
 - (void)controller:(NSFetchedResultsController *)controller didChangeObject:(id)anObject atIndexPath:(NSIndexPath *)indexPath forChangeType:(NSFetchedResultsChangeType)type newIndexPath:(NSIndexPath *)newIndexPath
 {
-    [self.changes addObject:@{@"type":@(type),@"object":anObject,@"indexPath":indexPath,@"newIndexPath":newIndexPath}];
+    [self.changes addObject:@{@"type":@(type),@"object":anObject,@"indexPath":indexPath,@"newIndexPath":newIndexPath?:[NSNull null]}];
 }
 
 - (void)controller:(NSFetchedResultsController *)controller didChangeSection:(id<NSFetchedResultsSectionInfo>)sectionInfo atIndex:(NSUInteger)sectionIndex forChangeType:(NSFetchedResultsChangeType)type
@@ -58,7 +58,7 @@
                     [self.delegate controller:controller didChangeSection:change[@"sectionInfo"] atIndex:[change[@"sectionIndex"] unsignedIntegerValue] forChangeType:[change[@"type"] unsignedIntegerValue]];
             } else {
                 if ([(id)self.delegate respondsToSelector:@selector(controller:didChangeObject:atIndexPath:forChangeType:newIndexPath:)])
-                    [self.delegate controller:controller didChangeObject:change[@"object"] atIndexPath:change[@"indexPath"] forChangeType:[change[@"type"] unsignedIntegerValue] newIndexPath:change[@"newIndexPath"]];
+                    [self.delegate controller:controller didChangeObject:change[@"object"] atIndexPath:change[@"indexPath"] forChangeType:[change[@"type"] unsignedIntegerValue] newIndexPath:(change[@"newIndexPath"]!=[NSNull null])?change[@"newIndexPath"]:nil];
             }
         }
         if ([(id)self.delegate respondsToSelector:@selector(controllerDidChangeContent:)])
