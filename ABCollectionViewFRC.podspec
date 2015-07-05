@@ -16,7 +16,7 @@ Pod::Spec.new do |s|
   #
 
   s.name         = "ABCollectionViewFRC"
-  s.version      = "0.0.1"
+  s.version      = "0.0.2"
   s.summary      = "NSFetchedResultsControllerDelegate wrapper for UICollectionView animated changes"
 
   s.description  = <<-DESC
@@ -73,7 +73,7 @@ Pod::Spec.new do |s|
   #  Supports git, hg, bzr, svn and HTTP.
   #
 
-  s.source       = { :git => "https://github.com/k06a/ABCollectionViewFRC.git", :tag => "0.0.1" }
+  s.source       = { :git => "https://github.com/k06a/ABCollectionViewFRC.git", :tag => "#{s.version}" }
 
 
   # ――― Source Code ―――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――― #
